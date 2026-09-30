@@ -1,378 +1,1460 @@
 /* =====================================================
-   GENERAL PAGE STYLING
+   VIRUS SURVIVAL GAME
+   DARK CYBER-INFECTED LAB THEME
+   PHASE 2 - FULL UI UPGRADE
    ===================================================== */
+
+
+/* ==================== RESET ==================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
 
 body {
-    font-family: Arial, sans-serif; /* Sets main font for the entire webpage */
-    text-align: center; /* Centers all text horizontally */
-    background-color: #f0f0f0; /* Light grey background for better contrast */
+    min-height: 100vh;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color: #e8f7ff;
+
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(0, 255, 170, 0.10),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(120, 0, 255, 0.12),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 50% 90%,
+            rgba(0, 140, 255, 0.10),
+            transparent 30%
+        ),
+
+        #050912;
+
+    overflow-x: hidden;
 }
+
+
+/* ==================== START SCREEN ==================== */
+
+#startScreen {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 500;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0, 255, 170, 0.08),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            135deg,
+            #02050a,
+            #07111b,
+            #03070d
+        );
+}
+
+
+.startContent {
+    width: min(520px, 92vw);
+
+    padding: 45px 35px;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(13, 28, 40, 0.96),
+            rgba(5, 12, 20, 0.96)
+        );
+
+    border: 1px solid rgba(0, 255, 170, 0.25);
+
+    box-shadow:
+        0 0 40px rgba(0, 255, 170, 0.08),
+        0 25px 70px rgba(0, 0, 0, 0.65);
+
+    backdrop-filter: blur(15px);
+}
+
+
+.startContent .virusIcon {
+    font-size: 72px;
+
+    margin-bottom: 15px;
+
+    animation:
+        virusFloat 2.5s ease-in-out infinite;
+
+    filter:
+        drop-shadow(0 0 15px rgba(0, 255, 170, 0.5));
+}
+
+
+.startContent h1 {
+    font-size: clamp(34px, 7vw, 58px);
+
+    margin-bottom: 12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00ffc3,
+            #00aaff,
+            #9d5cff
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+
+    text-shadow:
+        0 0 25px rgba(0, 255, 200, 0.15);
+}
+
+
+.startContent p {
+    color: #9bb2c0;
+
+    line-height: 1.7;
+
+    margin-bottom: 28px;
+
+    font-size: 15px;
+}
+
+
+/* ==================== BUTTON ==================== */
+
+button {
+    border: none;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+}
+
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+
+button:active {
+    transform: scale(0.97);
+}
+
+
+#startBtn,
+#restartBtn {
+    padding: 14px 28px;
+
+    border-radius: 14px;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00c896,
+            #008cff
+        );
+
+    box-shadow:
+        0 0 20px rgba(0, 200, 150, 0.25);
+}
+
+
+#startBtn:hover,
+#restartBtn:hover {
+    filter: brightness(1.15);
+
+    box-shadow:
+        0 0 30px rgba(0, 200, 150, 0.40);
+}
+
+
+/* ==================== HIDDEN ==================== */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* ==================== GAME HEADER ==================== */
+
+.gameHeader {
+    text-align: center;
+
+    padding:
+        30px
+        20px
+        18px;
+}
+
+
+.gameHeader h1 {
+    font-size: clamp(25px, 5vw, 42px);
+
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00ffc3,
+            #00aaff,
+            #a65cff
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+.gameHeader p {
+    margin-top: 7px;
+
+    color: #7893a4;
+
+    font-size: 14px;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* ==================== GAME INFO ==================== */
 
 #gameInfoCard {
-    background-color: #f5f5f5;
-    border-radius: 12px;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 500px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    width: min(1100px, 94vw);
+
+    margin: 10px auto 16px;
+
+    padding: 16px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(11, 25, 37, 0.94),
+            rgba(5, 13, 21, 0.94)
+        );
+
+    border: 1px solid rgba(0, 180, 255, 0.18);
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.35);
+
+    backdrop-filter: blur(12px);
 }
 
-#gameInfoCard h3, #gameInfoCard h4 {
-    margin-top: 0;
-}
 
-#gameInfoCard ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-#gameInfoCard ul li {
-    margin: 8px 0;
-    font-size: 16px;
-}
-
-.legendGrid {
+#info {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+    grid-template-columns:
+        repeat(6, 1fr);
+
     gap: 10px;
-    margin-top: 10px;
-    font-size: 16px;
 }
+
+
+.stat {
+    min-height: 65px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 5px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.06);
+}
+
+
+.stat span {
+    color: #7691a2;
+
+    font-size: 12px;
+}
+
+
+.stat strong {
+    color: #dff8ff;
+
+    font-size: 19px;
+}
+
+
+.controlsInfo {
+    margin-top: 12px;
+
+    text-align: center;
+
+    color: #668393;
+
+    font-size: 13px;
+}
+
+
+.hintToggle {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 10px;
+
+    color: #8ca9b8;
+
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+
+.hintToggle input {
+    accent-color: #00d9ff;
+}
+
+
+/* ==================== MESSAGE ==================== */
+
+#message {
+    width: min(900px, 92vw);
+
+    min-height: 38px;
+
+    margin: 8px auto 14px;
+
+    padding: 9px 16px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    border-radius: 12px;
+
+    background:
+        rgba(5, 15, 24, 0.85);
+
+    border:
+        1px solid rgba(0, 180, 255, 0.12);
+
+    color: #75dfff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
 
 /* =====================================================
-   GAME BOARD GRID
+   IMPORTANT
+   BOARD
    ===================================================== */
 
 #board {
-    display: grid; /* Enables CSS grid layout for the game board */
-    grid-template-columns: repeat(30, 30px); /* Creates 30 columns each 30px wide */
-    grid-template-rows: repeat(20, 30px); /* Creates 20 rows each 30px tall */
-    gap: 2px; /* Adds spacing between grid cells */
-    justify-content: center; /* Centers the board horizontally */
-    margin: 20px auto; /* Adds vertical spacing and centers board */
+
+    /* FORCE CSS GRID */
+    display: grid;
+
+    /* EXACTLY 30 COLUMNS */
+    grid-template-columns:
+        repeat(30, 30px);
+
+    /* EXACTLY 20 ROWS */
+    grid-template-rows:
+        repeat(20, 30px);
+
+    gap: 2px;
+
+    width: max-content;
+
+    height: max-content;
+
+    margin: 0 auto;
+
+    padding: 10px;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0b1822,
+            #050c13
+        );
+
+    border:
+        2px solid #1d4252;
+
+    box-shadow:
+        0 0 0 1px rgba(0, 255, 190, 0.06),
+        0 0 35px rgba(0, 170, 255, 0.08),
+        inset 0 0 30px rgba(0, 0, 0, 0.7);
+
+    overflow: visible;
 }
 
-/* =====================================================
-   INDIVIDUAL GRID CELL
-   ===================================================== */
+
+/* ==================== EVERY CELL ==================== */
 
 .cell {
-    width: 30px; /* Fixed width of each grid cell */
-    height: 30px; /* Fixed height of each grid cell */
-    border: 1px solid #ccc; /* Light border around cells for visibility */
-    display: flex; /* Enables flexbox layout */
-    justify-content: center; /* Centers emoji horizontally */
-    align-items: center; /* Centers emoji vertically */
-    font-weight: bold; /* Makes emoji/text bold */
-    font-size: 18px; /* Sets emoji size */
-    transition: background-color 0.3s; /* Smooth color transition when state changes */
+
+    width: 30px;
+
+    height: 30px;
+
+    min-width: 30px;
+
+    min-height: 30px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+
+    border-radius: 5px;
+
+    border:
+        1px solid rgba(90, 130, 150, 0.28);
+
+    background:
+        #0b1720;
+
+    color: white;
+
+    font-size: 17px;
+
+    user-select: none;
+
+    transition:
+        transform 0.15s ease,
+        filter 0.15s ease,
+        box-shadow 0.15s ease;
 }
 
-/* =====================================================
-   CELL TYPES (GAME OBJECT COLORS)
-   ===================================================== */
 
-.empty  { background-color: #ffffff; } /* Empty tile where player can move */
+/* ==================== EMPTY ==================== */
 
-.player { 
-    background-color: #067aef; /* Blue background for player */
-    color: white; /* White emoji color for contrast */
+.cell.empty {
+
+    background:
+        linear-gradient(
+            135deg,
+            #0d1b25,
+            #09131c
+        );
+
+    border-color:
+        rgba(82, 120, 140, 0.28);
 }
 
-.wall { 
-    background-color: #808080; /* Grey wall obstacle */
-    color: white; 
+
+/* ==================== WALL ==================== */
+
+.cell.wall {
+
+    background:
+        linear-gradient(
+            135deg,
+            #50616c 0%,
+            #344650 40%,
+            #202e37 100%
+        );
+
+    border:
+        1px solid #718894;
+
+    box-shadow:
+        inset 2px 2px 3px rgba(255,255,255,0.12),
+        inset -3px -3px 5px rgba(0,0,0,0.55),
+        0 0 3px rgba(90,150,180,0.15);
 }
 
-.bomb { 
-    background-color: #ff0000; /* Red background indicating danger */
-    color: white; 
+
+.cell.wall::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 4px;
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    border-radius: 3px;
 }
 
-.trap { 
-    background-color: #fff200; /* Yellow trap tile */
-    color: black; 
+
+.cell.wall:hover {
+
+    filter: brightness(1.25);
+
+    box-shadow:
+        0 0 8px rgba(110, 190, 220, 0.25),
+        inset 2px 2px 3px rgba(255,255,255,0.12);
 }
 
-.vtrap { 
-    background-color: #800080; /* Purple virus trap */
-    color: white; 
+
+/* ==================== PLAYER ==================== */
+
+.cell.player {
+
+    background:
+        radial-gradient(
+            circle,
+            #36d9ff 0%,
+            #0079b5 55%,
+            #06324b 100%
+        );
+
+    border:
+        1px solid #69e9ff;
+
+    box-shadow:
+        0 0 8px #00cfff,
+        0 0 18px rgba(0, 200, 255, 0.65);
 }
 
-.exit { 
-    background-color: #00cc00; /* Green exit tile */
-    color: white; 
+
+/* ==================== BOMB ==================== */
+
+.cell.bomb {
+
+    background:
+        radial-gradient(
+            circle,
+            #ff5555,
+            #7e1010
+        );
+
+    border:
+        1px solid #ff7777;
+
+    box-shadow:
+        0 0 8px rgba(255, 30, 30, 0.75);
+
+    animation:
+        bombPulse 1.2s infinite;
 }
 
-.shield { 
-    background-color: #1abc9c; /* Teal color for shield power-up */
-    color: white; 
+
+/* ==================== TRAP ==================== */
+
+.cell.trap {
+
+    background:
+        radial-gradient(
+            circle,
+            #ffd84d,
+            #7d5700
+        );
+
+    border:
+        1px solid #ffe477;
+
+    box-shadow:
+        0 0 8px rgba(255, 210, 0, 0.55);
 }
 
-.double { 
-    background-color: #f58402; /* Orange color for double move power-up */
-    color: white; 
+
+/* ==================== VIRUS TRAP ==================== */
+
+.cell.vtrap {
+
+    background:
+        radial-gradient(
+            circle,
+            #d54cff,
+            #4a0872
+        );
+
+    border:
+        1px solid #ee91ff;
+
+    box-shadow:
+        0 0 10px rgba(190, 50, 255, 0.75);
+
+    animation:
+        virusPulse 1.5s infinite;
 }
 
-.energy { 
-    background-color: #c5ba21; /* Gold color for energy bonus */
-    color: black; 
+
+/* ==================== EXIT ==================== */
+
+.cell.exit {
+
+    background:
+        radial-gradient(
+            circle,
+            #43ffb0,
+            #086c49
+        );
+
+    border:
+        1px solid #7affc8;
+
+    box-shadow:
+        0 0 10px rgba(0, 255, 160, 0.75);
+
+    animation:
+        exitPulse 1.5s infinite;
 }
 
-/* =====================================================
-   BFS HINT PATH HIGHLIGHT
-   ===================================================== */
 
-.hint {
-    background-color: #87cefa !important; /* Light blue highlight for BFS hint path */
-    transition: background-color 0.3s; /* Smooth animation for path highlighting */
+/* ==================== SHIELD ==================== */
+
+.cell.shield {
+
+    background:
+        radial-gradient(
+            circle,
+            #39ffe0,
+            #086a67
+        );
+
+    border:
+        1px solid #75fff0;
+
+    box-shadow:
+        0 0 10px rgba(0, 255, 220, 0.7);
 }
 
-/* =====================================================
-   GAME OVER POPUP OVERLAY
-   ===================================================== */
 
-#gameOverPanel {
-    position: fixed; /* Keeps overlay fixed relative to screen */
-    top: 0;
-    left: 0;
-    width: 100%; /* Covers entire screen width */
-    height: 100%; /* Covers entire screen height */
-    background: rgba(0,0,0,0.6); /* Dark transparent overlay background */
-    display: flex; /* Uses flexbox to center popup */
-    justify-content: center; /* Centers horizontally */
-    align-items: center; /* Centers vertically */
-    z-index: 10; /* Ensures popup appears above game elements */
+/* ==================== DOUBLE ==================== */
+
+.cell.double {
+
+    background:
+        radial-gradient(
+            circle,
+            #ff9b38,
+            #733200
+        );
+
+    border:
+        1px solid #ffc06d;
+
+    box-shadow:
+        0 0 10px rgba(255, 130, 20, 0.7);
 }
 
-#gameOverPanel.hidden {
-    display: none; /* Hides overlay when game is not over */
+
+/* ==================== ENERGY ==================== */
+
+.cell.energy {
+
+    background:
+        radial-gradient(
+            circle,
+            #fff45c,
+            #7e6800
+        );
+
+    border:
+        1px solid #fffaa5;
+
+    box-shadow:
+        0 0 10px rgba(255, 230, 0, 0.7);
+
+    animation:
+        energyPulse 1.2s infinite;
 }
 
-/* =====================================================
-   GAME OVER BOX
-   ===================================================== */
 
-#gameOverBox {
-    background: white; /* White popup background */
-    padding: 25px; /* Internal spacing */
-    border-radius: 12px; /* Rounded corners */
-    width: 320px; /* Fixed width for popup */
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3); /* Shadow effect for depth */
-    animation: popIn 0.5s ease; /* Plays popup animation when shown */
+/* ==================== ENEMY ==================== */
+
+.cell.enemy {
+
+    background:
+        radial-gradient(
+            circle,
+            #ff4545,
+            #4b0505
+        );
+
+    border:
+        1px solid #ff7777;
+
+    box-shadow:
+        0 0 10px rgba(255, 0, 0, 0.85);
+
+    animation:
+        enemyPulse 0.8s infinite;
 }
 
-#gameOverBox h2 {
-    font-size: 48px; /* Large emoji size */
-    margin: 0; /* Removes default margin */
+
+/* ==================== AI HINT ==================== */
+
+.cell.hint {
+
+    box-shadow:
+        inset 0 0 0 2px rgba(0, 200, 255, 0.8),
+        0 0 7px rgba(0, 200, 255, 0.45);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0, 140, 255, 0.25),
+            rgba(0, 255, 220, 0.12)
+        );
 }
 
-#gameOverBox p {
-    font-size: 18px; /* Text size for message */
-    margin: 10px 0 20px; /* Vertical spacing around message */
-}
 
-/* =====================================================
-   GAME OVER BUTTONS
-   ===================================================== */
-
-#restartBtn, #exitBtn {
-    margin: 8px; /* Space between buttons */
-    padding: 12px 24px; /* Button size */
-    font-size: 16px; /* Button text size */
-    border: none; /* Removes default border */
-    border-radius: 6px; /* Rounded button edges */
-    cursor: pointer; /* Shows pointer on hover */
-    transition: 0.3s; /* Smooth hover transition */
-}
-
-/* Restart Button */
-
-#restartBtn {
-    background: linear-gradient(135deg, #28a745, #4cd964); /* Green gradient background */
-    color: white; /* White text color */
-}
-
-#restartBtn:hover {
-    box-shadow: 0 0 10px #28a745; /* Adds glow effect on hover */
-}
-
-/* Exit Button */
-
-#exitBtn {
-    background: linear-gradient(135deg, #dc3545, #ff4d6d); /* Red gradient background */
-    color: white; /* White text color */
-}
-
-#exitBtn:hover {
-    box-shadow: 0 0 10px #dc3545; /* Red glow effect on hover */
-}
-
-/* =====================================================
-   POPUP ANIMATION
-   ===================================================== */
-
-@keyframes popIn {
-    from {
-        transform: scale(0.5); /* Starts smaller */
-        opacity: 0; /* Initially invisible */
-    }
-    to {
-        transform: scale(1); /* Expands to normal size */
-        opacity: 1; /* Fully visible */
-    }
-}
-
-/* =====================================================
-   WIN & LOSE COLOR THEMES
-   ===================================================== */
-
-.winBox {
-    background: linear-gradient(135deg, #d4edda, #c3e6cb); /* Green theme for win screen */
-}
-
-.loseBox {
-    background: linear-gradient(135deg, #f8d7da, #f5c6cb); /* Red theme for lose screen */
-}
-
-/* =====================================================
-   MOBILE CONTROL BUTTONS
-   ===================================================== */
+/* ==================== MOBILE CONTROLS ==================== */
 
 #mobileControls {
-    margin-top: 20px; /* Adds spacing above mobile controls */
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 18px auto 35px;
 }
+
+
+#mobileControls > div {
+
+    display: flex;
+
+    gap: 8px;
+}
+
 
 #mobileControls button {
-    font-size: 24px; /* Large arrow icons */
-    padding: 14px 18px; /* Button size */
-    margin: 5px; /* Space between buttons */
-    border: none; /* Removes default button border */
-    border-radius: 10px; /* Rounded buttons */
-    background: #333; /* Dark background */
-    color: white; /* White arrow icons */
-    cursor: pointer; /* Pointer cursor on hover */
+
+    width: 52px;
+
+    height: 48px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #152a38,
+            #091722
+        );
+
+    border:
+        1px solid #2b5668;
+
+    color: #dff9ff;
+
+    font-size: 20px;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.3);
 }
+
 
 #mobileControls button:hover {
-    background: #555; /* Slightly lighter color when hovered */
+
+    border-color: #00cfff;
+
+    box-shadow:
+        0 0 15px rgba(0, 200, 255, 0.25);
 }
 
-/* =====================================================
-   RESPONSIVE GAME BOARD
-   ===================================================== */
 
-#board {
-    display: grid;
-    grid-template-columns: repeat(30, 30px);
-    grid-template-rows: repeat(20, 30px);
-    gap: 2px;
+/* ==================== GAME OVER ==================== */
+
+#gameOverPanel {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 400;
+
+    display: flex;
+
     justify-content: center;
-    margin: 20px auto;
+
+    align-items: center;
+
+    padding: 20px;
+
+    background:
+        rgba(0, 4, 9, 0.82);
+
+    backdrop-filter: blur(9px);
 }
 
-/* =====================================================
-   RESPONSIVE GRID CELL
-   ===================================================== */
 
-.cell {
-    width: 30px;
-    height: 30px;
+#gameOverBox {
+
+    width: min(480px, 92vw);
+
+    padding: 35px;
+
+    text-align: center;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #101d28,
+            #060d14
+        );
+
+    border:
+        1px solid #294555;
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,0.7);
 }
 
+
+#gameOverEmoji {
+
+    font-size: 58px;
+
+    margin-bottom: 10px;
+}
+
+
+#gameOverTitle {
+
+    font-size: 30px;
+
+    margin-bottom: 10px;
+}
+
+
+#gameOverText {
+
+    color: #9cb2bf;
+
+    line-height: 1.6;
+
+    margin-bottom: 20px;
+}
+
+
+.winBox {
+
+    border-color:
+        rgba(0, 255, 160, 0.55) !important;
+
+    box-shadow:
+        0 0 35px rgba(0,255,160,0.18),
+        0 25px 80px rgba(0,0,0,0.7) !important;
+}
+
+
+.loseBox {
+
+    border-color:
+        rgba(255, 50, 50, 0.55) !important;
+
+    box-shadow:
+        0 0 35px rgba(255,30,30,0.16),
+        0 25px 80px rgba(0,0,0,0.7) !important;
+}
+
+
+.resultStats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 8px;
+
+    margin-bottom: 22px;
+}
+
+
+.resultStats span {
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,0.035);
+
+    color: #7f98a7;
+
+    font-size: 12px;
+}
+
+
+.resultStats b {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: #e8faff;
+
+    font-size: 17px;
+}
+
+
+#exitBtn {
+
+    margin-left: 8px;
+
+    padding: 13px 22px;
+
+    border-radius: 12px;
+
+    color: #ccd7dc;
+
+    background:
+        #18242d;
+
+    border:
+        1px solid #30424d;
+}
+
+
 /* =====================================================
-   MOBILE RESPONSIVE ADJUSTMENT
+   INSTRUCTIONS POPUP
    ===================================================== */
 
-@media (max-width: 600px){
+.instructionOverlay {
 
-    #mobileControls{
-        position: fixed; /* Fix controls at bottom */
-        bottom: 20px; /* Distance from bottom */
-        left: 0;
-        right: 0;
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 300;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+
+    background:
+        rgba(0, 4, 9, 0.84);
+
+    backdrop-filter: blur(10px);
+
+    animation:
+        overlayFade 0.25s ease;
+}
+
+
+.instructionBox {
+
+    width: min(700px, 94vw);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 28px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #101f2b,
+            #060d14
+        );
+
+    border:
+        1px solid rgba(0, 220, 255, 0.25);
+
+    box-shadow:
+        0 0 50px rgba(0, 170, 255, 0.12),
+        0 30px 90px rgba(0,0,0,0.7);
+
+    animation:
+        instructionPop 0.35s ease;
+}
+
+
+.instructionIcon {
+
+    width: 70px;
+
+    height: 70px;
+
+    margin: 0 auto 12px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(0,255,190,0.08);
+
+    border:
+        1px solid rgba(0,255,190,0.25);
+
+    font-size: 38px;
+
+    animation:
+        virusFloat 2s infinite;
+}
+
+
+.instructionBox h2 {
+
+    text-align: center;
+
+    font-size: 28px;
+
+    color: #e8fbff;
+
+    margin-bottom: 7px;
+}
+
+
+.instructionIntro {
+
+    text-align: center;
+
+    color: #8ca6b4;
+
+    margin-bottom: 20px;
+}
+
+
+.instructionList {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 10px;
+}
+
+
+.instructionItem {
+
+    display: flex;
+
+    gap: 10px;
+
+    align-items: center;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255,255,255,0.035);
+
+    border:
+        1px solid rgba(255,255,255,0.06);
+}
+
+
+.instructionEmoji {
+
+    min-width: 42px;
+
+    text-align: center;
+
+    font-size: 23px;
+}
+
+
+.instructionItem p {
+
+    color: #94aebb;
+
+    font-size: 13px;
+
+    line-height: 1.45;
+}
+
+
+.instructionItem b {
+
+    color: #dffaff;
+}
+
+
+.instructionControls {
+
+    margin-top: 15px;
+
+    padding: 13px;
+
+    text-align: center;
+
+    border-radius: 12px;
+
+    color: #91b5c5;
+
+    background:
+        rgba(0,150,255,0.07);
+
+    border:
+        1px solid rgba(0,180,255,0.12);
+
+    font-size: 13px;
+}
+
+
+.instructionActions {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-top: 18px;
+}
+
+
+#instructionOkay {
+
+    padding: 13px;
+
+    border-radius: 12px;
+
+    color: white;
+
+    font-weight: 700;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00b98b,
+            #008cff
+        );
+}
+
+
+#dontRemindBtn {
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    color: #758b97;
+
+    background:
+        transparent;
+}
+
+
+/* ==================== ANIMATIONS ==================== */
+
+@keyframes virusFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
     }
 
+    50% {
+        transform: translateY(-8px);
+    }
 }
+
+
+@keyframes bombPulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 6px rgba(255, 30, 30, 0.55);
+    }
+
+    50% {
+        box-shadow:
+            0 0 17px rgba(255, 30, 30, 0.95);
+    }
+}
+
+
+@keyframes virusPulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 7px rgba(190, 50, 255, 0.55);
+    }
+
+    50% {
+        box-shadow:
+            0 0 18px rgba(220, 70, 255, 1);
+    }
+}
+
+
+@keyframes exitPulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 7px rgba(0,255,160,0.55);
+    }
+
+    50% {
+        box-shadow:
+            0 0 20px rgba(0,255,160,1);
+    }
+}
+
+
+@keyframes energyPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+
+@keyframes enemyPulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 7px rgba(255,0,0,0.55);
+    }
+
+    50% {
+        box-shadow:
+            0 0 20px rgba(255,0,0,1);
+    }
+}
+
+
+@keyframes overlayFade {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+@keyframes instructionPop {
+
+    from {
+        opacity: 0;
+        transform: scale(0.94) translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
 
 /* =====================================================
-   START SCREEN
+   MOBILE
    ===================================================== */
 
-#startScreen{
-    position:fixed; /* Covers full screen before game starts */
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
+@media (max-width: 800px) {
 
-    background:linear-gradient(135deg,#2c3e50,#4ca1af); /* Gradient background */
+    #gameInfoCard {
 
-    color:white;
+        width: 94vw;
 
-    display:flex; /* Center content using flexbox */
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
+        padding: 10px;
+    }
 
-    z-index:20; /* Keeps start screen above game */
+
+    #info {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+
+    /*
+       IMPORTANT:
+       Board stays EXACTLY 20 x 30.
+       It does NOT get scaled tiny.
+    */
+
+    #board {
+
+        margin-left: 10px;
+        margin-right: 10px;
+
+        /*
+           Horizontal scrolling is handled
+           by the page instead of destroying
+           the grid dimensions.
+        */
+
+        grid-template-columns:
+            repeat(30, 30px);
+
+        grid-template-rows:
+            repeat(20, 30px);
+    }
+
+
+    .instructionList {
+
+        grid-template-columns:
+            1fr;
+    }
 }
 
-#startScreen h1{
-    font-size:40px; /* Large title */
-    margin-bottom:10px; /* Space below title */
-}
 
-#startBtn{
-    padding:14px 30px; /* Button padding */
-    font-size:20px; /* Button text size */
-    border:none; /* Remove border */
-    border-radius:8px; /* Rounded corners */
-    background:#00cc66; /* Green background */
-    color:white; /* White text */
-    cursor:pointer; /* Pointer on hover */
-    transition:0.3s; /* Smooth hover animation */
-}
+@media (max-width: 520px) {
 
-#startBtn:hover{
-    transform:scale(1.1); /* Slight zoom effect */
-    box-shadow:0 0 10px #00cc66; /* Glow effect */
-}
+    .gameHeader {
 
-/* =====================================================
-   GAME LEGEND PANEL
-   ===================================================== */
+        padding-top: 20px;
+    }
 
-#legend{
-    width:70%; /* Legend container width */
-    margin:10px auto; /* Center legend */
-    background:white; /* White background */
-    padding:10px; /* Internal spacing */
-    border-radius:10px; /* Rounded edges */
-    box-shadow:0 3px 10px rgba(0,0,0,0.2); /* Soft shadow */
-}
 
-.legendGrid{
-    display:grid; /* Grid layout for legend items */
-    grid-template-columns:repeat(4,1fr); /* 4 columns layout */
-    gap:8px; /* Spacing between legend items */
-    text-align:left; /* Align text left */
-}
+    .gameHeader h1 {
 
-/* =====================================================
-   ENEMY TILE STYLE
-   ===================================================== */
+        font-size: 27px;
+    }
 
-.enemy{
-    background:#111; /* Dark background for enemy */
-    color:white; /* White emoji/text */
-}
 
-/* =====================================================
-   FOG OF WAR EFFECT
-   ===================================================== */
+    .gameHeader p {
 
-.fog{
-    background:#000 !important; /* Black tile to hide unexplored area */
-    color:transparent; /* Hide emoji/text in fog cells */
+        font-size: 12px;
+    }
+
+
+    #info {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .stat {
+
+        min-height: 58px;
+    }
+
+
+    .resultStats {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    #gameOverBox {
+
+        padding: 25px 18px;
+    }
+
+
+    #exitBtn {
+
+        margin-left: 0;
+
+        margin-top: 8px;
+
+        width: 100%;
+    }
+
+
+    #restartBtn {
+
+        width: 100%;
+    }
+
+
+    .instructionBox {
+
+        padding: 20px;
+    }
 }
